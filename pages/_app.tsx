@@ -1,6 +1,13 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import {ProductsContextProvider} from './components/ProductsContext';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <ProductsContextProvider>
+      <Component {...pageProps} />
+    </ProductsContextProvider>
+  );
 }
+
+export default MyApp;
