@@ -15,6 +15,12 @@
 # production
 /build
 
+# comments
+*.js
+*.ts
+*jsx
+*tsx
+
 # misc
 .DS_Store
 *.pem

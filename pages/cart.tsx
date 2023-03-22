@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "./components/ProductsContext";
 import { ProductsInfo } from "./interfaces/productsInfo";
 import Link from "next/link";
+// import * as Yup from "yup";
 
 export default function CheckoutPage(): JSX.Element {
   const { selectedProducts, setSelectedProducts } = useContext(ProductsContext);
@@ -13,6 +14,28 @@ export default function CheckoutPage(): JSX.Element {
   const [email, setEmail] = useState<string>("");
 
   const [productCart, setProductCart] = useState<ProductsInfo[]>([]);
+
+  // const checkoutSchema = Yup.object().shape({
+  //   address: Yup.string(),
+  //   city: Yup.string(),
+  //   name: Yup.string(),
+  //   email: Yup.string().email().required(),
+  // });
+
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   try {
+  //     await checkoutSchema.validate(
+  //       { address, city, name, email },
+       
+  //     );
+  
+  //     // Envie os dados do formulário para o servidor aqui
+  //   } catch (err) {
+  //     // Handle errors de validação aqui
+  //     console.error(err);
+  //   }
+  // };
 
   useEffect(() => {
     const uniqIds = [...new Set(selectedProducts)];
@@ -95,7 +118,7 @@ export default function CheckoutPage(): JSX.Element {
         })}
       <div className="flex flex-col w-6/12 m-auto">
         <form action="/api/checkout" method="POST">
-          <div className="">
+          <div>
             <div>
               <input
                 name="address"
