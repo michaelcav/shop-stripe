@@ -14,23 +14,19 @@ export default function Footer(): JSX.Element {
       <Link
         href={"/"}
         className={
-          (path === "/" ? "text-emerald-500" : " text-gray-700") +
+          (path === "/" ? "text-emerald-500" : " text-gray-500") +
           "  flex justify-center items-center flex-col"
         }
       >
         <AiFillHome />
         <span>Home</span>
       </Link>
-      <Link legacyBehavior href={"/cart"}>
-        <a
-          className={
-            (path === "/checkoutPage" ? "text-emerald-500" : " text-gray-700") +
+      <Link href={"/cart"} className={
+            (path === "/cart" ? "text-emerald-500" : " text-gray-500") +
             "  flex justify-center items-center flex-col"
-          }
-        >
+        }>
           <AiOutlineShoppingCart />
           <span>Cart {selectedProducts.length}</span>
-        </a>
       </Link>
     </footer>
   );

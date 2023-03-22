@@ -1,5 +1,6 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import Footer from "./Footer";
+import NavBar from "./NavBar";
 import { ProductsContext } from "./ProductsContext";
 
 interface LayoutProps {
@@ -28,6 +29,7 @@ export default function Layout({ children }: LayoutProps) {
     </div>
   ) : (
     <div>
+      <NavBar/>
       <div className="main p-5">{children}</div>
       <Footer />
     </div>

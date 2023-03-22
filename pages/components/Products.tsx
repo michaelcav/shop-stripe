@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProductsInfo } from "pages/interfaces/productsInfo";
+import { ProductsInfo } from "../interfaces/productsInfo";
 import { useContext } from "react";
 import { ProductsContext } from "./ProductsContext";
 

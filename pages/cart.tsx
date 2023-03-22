@@ -21,14 +21,14 @@ export default function CheckoutPage(): JSX.Element {
       .then((json) => setProductCart(json));
   }, [selectedProducts]);
 
-  function moreOfThisProduct(id: string) {
-    setSelectedProducts((prev: string[]) => [...prev, id]);
+  function moreOfThisProduct(id) {
+    setSelectedProducts((prev) => [...prev, id]);
   }
 
-  function lessOfThisProduct(id: string) {
+  function lessOfThisProduct(id) {
     const pos = selectedProducts.indexOf(id);
     if (pos !== -1) {
-      setSelectedProducts((prev: string[]) => {
+      setSelectedProducts((prev) => {
         return prev.filter((value, index) => index !== pos);
       });
     }
@@ -93,48 +93,46 @@ export default function CheckoutPage(): JSX.Element {
             </div>
           );
         })}
-     <div className="flex flex-col w-6/12 m-auto">
-     <form action="/api/checkout" method="POST">
-        <div className="">
-          <div>
-            <input
-              name="address"
-              className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Street address, number"
-            />
-            <input
-              name="city"
-              className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="City and postal code"
-            />
-            <input
-              name="name"
-              className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-            />
-            <input
-              name="email"
-              className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email address"
-            />
+      <div className="flex flex-col w-6/12 m-auto">
+        <form action="/api/checkout" method="POST">
+          <div className="">
+            <div>
+              <input
+                name="address"
+                className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Street address, number"
+              />
+              <input
+                name="city"
+                className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="City and postal code"
+              />
+              <input
+                name="name"
+                className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+              />
+              <input
+                name="email"
+                className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2 "
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email address"
+              />
+            </div>
           </div>
 
-         
-        </div>
-      </form>
-      <div className="mt-4">
+          <div className="mt-4">
             <div className="flex my-1">
               <h3 className="grow font-semibold">Subtotal:</h3>
               <h3 className=" font-semibold">${subtotal}</h3>
@@ -162,26 +160,31 @@ export default function CheckoutPage(): JSX.Element {
                 name="products"
                 value={selectedProducts.join(",")}
               />
-              <button className="bg-emerald-500 p-3 hover:bg-emerald-600 text-white font-bold shadow-emerald-300 shadow-lg rounded-md w-2/5 duration-200">
+              <button
+                type="submit"
+                className="bg-emerald-500 p-3 hover:bg-emerald-600 text-white font-bold shadow-emerald-300 shadow-lg rounded-md w-2/5 duration-200"
+              >
                 Buy
               </button>
             </div>
           </div>
-     </div>
-     
+        </form>
+      </div>
     </Layout>
   ) : (
     <Layout>
-    <div className="mb-5 flex-col  items-center justify-center">
-      <div className="text-center p-5">
-        <h1 className="font-semibold mb-3">Your Cart is empity, please add your products</h1>
-        <Link href={'/'}>
-          <button className="bg-emerald-500 p-3 hover:bg-emerald-600 text-white font-bold shadow-emerald-300 shadow-lg rounded-md w-2/5 duration-200">
-            Go to add products
-          </button>
-        </Link>
+      <div className="mb-5 flex-col  items-center justify-center">
+        <div className="text-center p-5">
+          <h1 className="font-semibold mb-3">
+            Your Cart is empity, please add your products
+          </h1>
+          <Link href={"/"}>
+            <button className="bg-emerald-500 p-3 hover:bg-emerald-600 text-white font-bold shadow-emerald-300 shadow-lg rounded-md w-2/5 duration-200">
+              Go to add products
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
-  </Layout>
+    </Layout>
   );
 }
