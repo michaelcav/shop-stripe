@@ -43,7 +43,7 @@ export default function Home({ products }: HomeProps) {
             <div key={categoryName}>
               {products.find((p) => p.category === categoryName) && (
                 <div>
-                  <h2 className="text-2xl py-5 capitalize">{categoryName}</h2>
+                  <h2 className="text-2xl py-5 relative capitalize flex ml-5 lg:justify-center md:justify-center">{categoryName}</h2>
                   <div className="flex flex-wrap items-center justify-center">
                     {products
                       .filter((p) => p.category === categoryName)
