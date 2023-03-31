@@ -10,9 +10,8 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xl: '945px',
-      lg: '944px',
-      md: '648px',
+      lg: {'max': '944px'},
+      md: {'max': '648px'},
     },
     extend: {
       top: {
