@@ -27,9 +27,9 @@ export default function CheckoutPage(): JSX.Element {
   //   try {
   //     await checkoutSchema.validate(
   //       { address, city, name, email },
-       
+
   //     );
-  
+
   //     // Envie os dados do formulário para o servidor aqui
   //   } catch (err) {
   //     // Handle errors de validação aqui

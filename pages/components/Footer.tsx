@@ -10,7 +10,7 @@ export default function Footer(): JSX.Element {
   const {selectedProducts} = useContext(ProductsContext);
 
   return (
-    <footer className="sticky bottom-0 bg-white p-5 w-[1000px] flex m-auto border-t border-gray-200 space-x-12 justify-center">
+    <footer className="sticky bottom-0 w-full bg-white p-5 flex m-auto border-t border-gray-200 space-x-12 justify-center">
       <Link
         href={"/"}
         className={

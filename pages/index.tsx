@@ -30,21 +30,21 @@ export default function Home({ products }: HomeProps) {
 
   return (
     <Layout>
-      <div className=" w-[1000px] m-auto p-5">
+      <div className="w-[1000] m-auto flex flex-col items-center">
         <input
           value={phrase}
           onChange={(e) => setPhrase(e.target.value)}
           type="text"
           placeholder="Search for products..."
-          className="bg-gray-100 w-full py-2 px-4 rounded-xl"
+          className="bg-gray-100 w-6/12 py-2 px-4 rounded-xl"
         />
         <div>
           {categoriesNames.map((categoryName) => (
             <div key={categoryName}>
               {products.find((p) => p.category === categoryName) && (
                 <div>
-                  <h2 className="text-2xl py-5 capitalize">{categoryName}</h2>
-                  <div className="flex -mx-5  flex-wrap ">
+                  <h2 className="xl:text-2xl py-5 capitalize">{categoryName}</h2>
+                  <div className="flex flex-wrap items-center justify-center">
                     {products
                       .filter((p) => p.category === categoryName)
                       .map((productsInfo) => (

@@ -10,9 +10,18 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xl: '1200px',
+      xl: '945px',
+      lg: '944px',
+      md: '648px',
     },
     extend: {
+      top: {
+        '-5': '-5px',
+      },
+      border: {
+        '1': '1px'
+      },
+
       width: {
         '1000': '1000px',
         '1200': '1200px',
