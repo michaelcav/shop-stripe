@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "./components/ProductsContext";
 import { ProductsInfo } from "./interfaces/productsInfo";
 import Link from "next/link";
-// import * as Yup from "yup";
+import Image from 'next/image'
+
 
 export default function CheckoutPage(): JSX.Element {
   const { selectedProducts, setSelectedProducts } = useContext(ProductsContext);
@@ -13,30 +14,19 @@ export default function CheckoutPage(): JSX.Element {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
-  const [productCart, setProductCart] = useState<ProductsInfo[]>([]);
-
-  // const checkoutSchema = Yup.object().shape({
-  //   address: Yup.string(),
-  //   city: Yup.string(),
-  //   name: Yup.string(),
-  //   email: Yup.string().email().required(),
-  // });
-
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   try {
-  //     await checkoutSchema.validate(
-  //       { address, city, name, email },
-
-  //     );
-
-  //     // Envie os dados do formulário para o servidor aqui
-  //   } catch (err) {
-  //     // Handle errors de validação aqui
-  //     console.error(err);
-  //   }
-  // };
-
+  interface Product {
+    _id: string;
+    name: string;
+    price: number;
+    description: string;
+    picture: string;
+    quantity: number;
+  }
+  
+  const [productCart, setProductCart] = useState<Product[]>([]);
+  
+  
+ console.log({...setProductCart})
   useEffect(() => {
     const uniqIds = [...new Set(selectedProducts)];
     fetch("/api/products?ids=" + uniqIds.join(","))
@@ -44,14 +34,14 @@ export default function CheckoutPage(): JSX.Element {
       .then((json) => setProductCart(json));
   }, [selectedProducts]);
 
-  function moreOfThisProduct(id) {
+  function moreOfThisProduct(id: string) {
     setSelectedProducts((prev) => [...prev, id]);
   }
 
-  function lessOfThisProduct(id) {
+  function lessOfThisProduct(id: string) {
     const pos = selectedProducts.indexOf(id);
     if (pos !== -1) {
-      setSelectedProducts((prev) => {
+      setSelectedProducts((prev ) => {
         return prev.filter((value, index) => index !== pos);
       });
     }
@@ -67,12 +57,21 @@ export default function CheckoutPage(): JSX.Element {
   }
   const total = subtotal + deliveryPrice;
 
-  console.log(selectedProducts);
-  console.log(productCart.length);
+  if (Array.isArray(productCart)) {
+    productCart.forEach((product) => {
+      console.log(product._id);
+      // Faça o que precisa ser feito com a propriedade '_id' de cada objeto
+    });
+  } 
+  // Se 'productCart' for um único objeto:
+  else {
+    console.log(productCart._id);
+    // Faça o que precisa ser feito com a propriedade '_id'
+  }
   return selectedProducts.length !== 0 ? (
     <Layout>
       {productCart.length !== 0 &&
-        productCart.map((productCart: ProductsInfo) => {
+        productCart.map((productCart: Product) => {
           const amount = selectedProducts.filter(
             (id) => id === productCart._id
           ).length;
@@ -80,7 +79,7 @@ export default function CheckoutPage(): JSX.Element {
           return (
             <div className="flex justify-center mb-5" key={productCart._id}>
               <div className="bg-gray-100 p-3 rounded-xl shrink-0">
-                <img className="w-24" src={productCart.picture} alt="Picture" />
+              <Image src={productCart.picture} alt="Picture" width={96} height={96} />
               </div>
               <div className="pl-4">
                 <h3 className="font-bold  text-base">{productCart.name}</h3>
@@ -100,9 +99,11 @@ export default function CheckoutPage(): JSX.Element {
                     </button>
                     <span className="px-2 font-semibold">
                       {
-                        selectedProducts.filter((id) => id === productCart._id)
-                          .length
+                 selectedProducts.filter((id) => id === productCart._id).length
+
+
                       }
+
                     </span>
                     <button
                       onClick={() => moreOfThisProduct(productCart._id)}
